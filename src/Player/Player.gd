@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
+class_name Player
+
 var _velocity := Vector2.ZERO
 
-@onready var nav = get_parent()
-@onready var target = get_parent().get_parent().get_node("Target")
+@onready var nav: Node2D = $"../"
+@onready var target: CharacterBody2D = $"../../Target"
 #onready var map = nav.get_node("TileMap")
 #onready var game = map.get_parent()
 
@@ -11,7 +13,7 @@ var _velocity := Vector2.ZERO
 @onready var _sprite := $Sprite2D
 @onready var _timer := $Timer
 
-func _ready():
+func _ready() -> void:
 	# Waits for Game.gd to run randomize()
 	await get_tree().process_frame
 	$SoundFx/SpawnSound.play_sound()

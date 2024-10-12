@@ -2,10 +2,10 @@ extends Control
 
 class_name HUD
 
-@onready var level_number_label = $VBoxContainer/VBoxContainer/LevelNumber/LevelNumberValue
-@onready var coins_label = $VBoxContainer/VBoxContainer/CoinNumber/CoinNumberValue
-@onready var level_name_label = $VBoxContainer/CenterContainer/LevelNameValue
-@onready var fadein_pane = $FadeinPane
+@onready var level_number_label: Label = $VBoxContainer/VBoxContainer/LevelNumber/LevelNumberValue
+@onready var coins_label: Label = $VBoxContainer/VBoxContainer/CoinNumber/CoinNumberValue
+@onready var level_name_label: Label = $VBoxContainer/CenterContainer/LevelNameValue
+@onready var fadein_pane: ColorRect = $FadeinPane
 
 var level_name: set = set_level_name
 func set_level_name(value: String) -> void:

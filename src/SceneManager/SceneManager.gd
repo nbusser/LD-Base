@@ -1,7 +1,9 @@
 extends Control
 
-var current_level_number = 0
-var nb_coins = 0
+class_name SceneManager
+
+var current_level_number := 0
+var nb_coins := 0
 
 var current_player: AudioStreamPlayer
 var current_scene: set = set_scene
@@ -14,39 +16,39 @@ var current_scene: set = set_scene
 @onready var credits = preload("res://src/Credits/Credits.tscn")
 @onready var game_over = preload("res://src/GameOver/GameOver.tscn")
 
-@onready var viewport = $SubViewportContainer/SubViewport
+@onready var viewport: Viewport = $SubViewportContainer/SubViewport
 
 # Settings of all levels. To be configured from the editor
 @export var levels: Array[LevelData]
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	randomize()
 	_run_main_menu()
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("quit"):
 		get_tree().quit()
 
 
-func _on_quit_game():
+func _on_quit_game() -> void:
 	get_tree().quit()
 
 
-func _on_start_game():
+func _on_start_game() -> void:
 	_load_level()
 
 
-func _on_show_credits():
+func _on_show_credits() -> void:
 	_run_credits(true)
 
 
-func _on_show_main_menu():
+func _on_show_main_menu() -> void:
 	_run_main_menu()
 
 
-func set_scene(new_scene):
+func set_scene(new_scene: Node) -> void:
 	if current_scene:
 		viewport.remove_child(current_scene)
 		current_scene.queue_free()
@@ -55,9 +57,9 @@ func set_scene(new_scene):
 	viewport.add_child(current_scene)
 
 
-func _load_level():
-	var scene = level.instantiate()
-	scene.init(levels[current_level_number], current_level_number, nb_coins)
+func _load_level() -> void:
+	var scene: Level = level.instantiate()
+	scene.init(current_level_number, levels[current_level_number], nb_coins)
 
 	scene.connect("end_of_level", Callable(self, "_on_end_of_level"))
 	scene.connect("game_over", Callable(self, "_on_game_over"))
@@ -65,7 +67,7 @@ func _load_level():
 	self.current_scene = scene
 
 
-func _on_end_of_level():
+func _on_end_of_level() -> void:
 	if current_level_number + 1 >= 2:
 		# Win
 		_run_credits(false)
@@ -73,12 +75,12 @@ func _on_end_of_level():
 		_load_end_level()
 
 
-func first_level():
+func first_level() -> bool:
 	return current_level_number == 0
 
 
-func _on_game_over():
-	var scene = game_over.instantiate()
+func _on_game_over() -> void:
+	var scene: GameOver = game_over.instantiate()
 
 	scene.connect("restart", Callable(self, "_on_restart_level"))
 	scene.connect("quit", Callable(self, "_on_quit_game"))
@@ -86,16 +88,16 @@ func _on_game_over():
 	self.current_scene = scene
 
 
-func _on_restart_level():
+func _on_restart_level() -> void:
 	_load_level()
 
 
-func _on_restart_select_level():
+func _on_restart_select_level() -> void:
 	_load_end_level()
 
 
-func _load_end_level():
-	var scene = change_level.instantiate()
+func _load_end_level() -> void:
+	var scene: EndLevel = change_level.instantiate()
 	scene.init(current_level_number, nb_coins)
 
 	scene.connect("next_level", Callable(self, "_on_next_level"))
@@ -103,14 +105,14 @@ func _load_end_level():
 	self.current_scene = scene
 
 
-func _on_next_level():
+func _on_next_level() -> void:
 	current_level_number += 1
 	change_music_track(music_players[current_level_number % len(music_players)])
 	_load_level()
 
 
-func _run_credits(can_go_back):
-	var scene = credits.instantiate()
+func _run_credits(can_go_back: bool) -> void:
+	var scene: Credits = credits.instantiate()
 
 	scene.set_back(can_go_back)
 	if can_go_back:
@@ -119,8 +121,8 @@ func _run_credits(can_go_back):
 	self.current_scene = scene
 
 
-func _run_main_menu():
-	var scene = main_menu.instantiate()
+func _run_main_menu() -> void:
+	var scene: MainMenu = main_menu.instantiate()
 
 	change_music_track(music_players[0])
 
@@ -131,7 +133,7 @@ func _run_main_menu():
 	self.current_scene = scene
 
 
-func change_music_track(new_player: AudioStreamPlayer):
+func change_music_track(new_player: AudioStreamPlayer) -> void:
 	if current_player != new_player:
 		for mp in music_players:
 			mp.stop()

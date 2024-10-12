@@ -1,23 +1,25 @@
 extends Control
 
+class_name Credits
+
 signal back
 
-var back_button_visible
+var back_button_visible: bool
 
 @onready var back_button = $CenterContainer/VBoxContainer/CenterContainer4/Back
 
 
-func _ready():
-	assert(back_button_visible != null) #,"set_back must be called before creating Credits scene")
+func _ready() -> void:
+	assert(back_button_visible != null) # ,"set_back must be called before creating Credits scene")
 	if back_button_visible:
 		back_button.show()
 	else:
 		back_button.hide()
 
 
-func set_back(value):
+func set_back(value: bool) -> void:
 	back_button_visible = value
 
 
-func _on_Back_pressed():
+func _on_Back_pressed() -> void:
 	emit_signal("back")
