@@ -17,8 +17,8 @@ func _ready() -> void:
 	# Waits for Game.gd to run randomize()
 	await get_tree().process_frame
 	$SoundFx/SpawnSound.play_sound()
-	_timer.connect("timeout", Callable(self, "_update_pathfinding"))
-	_agent.connect("velocity_computed", Callable(self, "move"))
+	_timer.timeout.connect(self._update_pathfinding)
+	_agent.velocity_computed.connect(self.move)
 
 func _physics_process(delta: float) -> void:
 	if abs(global_position.distance_to(target.global_position)) < 50:
