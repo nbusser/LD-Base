@@ -1,3 +1,28 @@
 extends Node
 
 const SAMPLE_GLOBAL_VARIABLE: int = 1
+
+# Status sent along with signal end_scene()
+enum EndSceneStatus {
+	# Main meu
+	MAIN_MENU_CLICK_START,
+	MAIN_MENU_SELECT_LEVEL,
+	MAIN_MENU_CLICK_CREDITS,
+	MAIN_MENU_CLICK_QUIT,
+	# Level
+	LEVEL_END_WIN,
+	LEVEL_END_LOSE,
+	# Score screen
+	SCORE_SCREEN_NEXT,
+	SCORE_SCREEN_RETRY,
+	# Select level
+	SELECT_LEVEL_SELECTED,
+	SELECT_LEVEL_BACK,
+	# Credits
+	CREDITS_BACK,
+}
+
+signal scene_ended(status: EndSceneStatus, params: Dictionary)
+
+func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:
+	scene_ended.emit(status, params)

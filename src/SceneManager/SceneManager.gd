@@ -21,9 +21,9 @@ var current_scene: set = set_scene
 # Settings of all levels. To be configured from the editor
 @export var levels: Array[LevelData]
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	randomize()
+	Globals.scene_ended.connect(self._on_end_scene)
 	_run_main_menu()
 
 
@@ -49,6 +49,7 @@ func _on_show_main_menu() -> void:
 
 
 func set_scene(new_scene: Node) -> void:
+	# Free older scene
 	if current_scene:
 		viewport.remove_child(current_scene)
 		current_scene.queue_free()
@@ -68,7 +69,7 @@ func _load_level() -> void:
 
 
 func _on_end_of_level() -> void:
-	if current_level_number + 1 >= 2:
+	if current_level_number + 1 >= levels.size():
 		# Win
 		_run_credits(false)
 	else:
@@ -140,3 +141,6 @@ func change_music_track(new_player: AudioStreamPlayer) -> void:
 
 		new_player.play()
 		current_player = new_player
+
+func _on_end_scene(status: Globals.EndSceneStatus, params: Dictionary = {}) -> void:
+	print(status)
