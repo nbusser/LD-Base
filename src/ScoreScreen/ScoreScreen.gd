@@ -1,6 +1,6 @@
 extends Control
 
-class_name EndLevel
+class_name ScoreScreen
 
 var level_number: int
 var nb_coins: int
@@ -12,7 +12,7 @@ var nb_coins: int
 func _ready() -> void:
 	assert(
 		level_number != null and nb_coins != null,
-		"init must be called before creating EndLevel scene"
+		"init must be called before creating ScoreScreen scene"
 	)
 	level_label.text = str(level_number + 1)
 	coin_label.text = str(nb_coins)

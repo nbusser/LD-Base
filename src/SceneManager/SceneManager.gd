@@ -12,7 +12,7 @@ var current_scene: set = set_scene
 
 @onready var main_menu = preload("res://src/MainMenu/MainMenu.tscn")
 @onready var level = preload("res://src/Level/Level.tscn")
-@onready var change_level = preload("res://src/EndLevel/EndLevel.tscn")
+@onready var change_level = preload("res://src/ScoreScreen/ScoreScreen.tscn")
 @onready var credits = preload("res://src/Credits/Credits.tscn")
 @onready var game_over = preload("res://src/GameOver/GameOver.tscn")
 
@@ -91,7 +91,7 @@ func _restart_level() -> void:
 	_run_level()
 
 func _load_score_screen() -> void:
-	var scene: EndLevel = change_level.instantiate()
+	var scene: 	ScoreScreen = change_level.instantiate()
 	scene.init(current_level_number, nb_coins)
 	self.current_scene = scene
 
