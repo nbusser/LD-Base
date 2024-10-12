@@ -15,7 +15,8 @@ var current_audio_player: AudioStreamPlayer
 
 @onready var main_menu = preload("res://src/MainMenu/MainMenu.tscn")
 @onready var level = preload("res://src/Level/Level.tscn")
-@onready var change_level = preload("res://src/ScoreScreen/ScoreScreen.tscn")
+@onready var score_screen = preload("res://src/ScoreScreen/ScoreScreen.tscn")
+@onready var level_selector = preload("res://src/LevelSelector/LevelSelector.tscn")
 @onready var credits = preload("res://src/Credits/Credits.tscn")
 @onready var game_over = preload("res://src/GameOver/GameOver.tscn")
 
@@ -59,12 +60,20 @@ func _start_game() -> void:
 # Load current level
 func _run_level() -> void:
 	var scene: Level = level.instantiate()
+	# Provies its settings to the level
 	scene.init(current_level_number, levels[current_level_number], nb_coins)
+	# Play level music
+	change_music_track(music_players[current_level_number % len(music_players)])
 	self.current_scene = scene
 
 func _run_selected_level(level_i: int) -> void:
 	current_level_number = level_i
 	_run_level()
+
+func _run_level_selector() -> void:
+	var scene: LevelSelector = level_selector.instantiate()
+	scene.init(levels)
+	self.current_scene = scene
 
 func _on_end_of_level(new_nb_coins: int) -> void:
 	# Update game state depending on level result
@@ -79,7 +88,7 @@ func _restart_level() -> void:
 	_run_level()
 
 func _load_score_screen() -> void:
-	var scene: ScoreScreen = change_level.instantiate()
+	var scene: ScoreScreen = score_screen.instantiate()
 	scene.init(current_level_number, nb_coins)
 	self.current_scene = scene
 
@@ -91,7 +100,6 @@ func _run_next_level() -> void:
 		_run_credits(false)
 	else:
 		# Load next level
-		change_music_track(music_players[current_level_number % len(music_players)])
 		_run_level()
 
 func _run_credits(can_go_back: bool) -> void:
@@ -113,8 +121,8 @@ func _on_end_scene(status: Globals.EndSceneStatus, params: Dictionary = {}) -> v
 	match status:
 		Globals.EndSceneStatus.MAIN_MENU_CLICK_START:
 			_start_game()
-		Globals.EndSceneStatus.MAIN_MENU_SELECT_LEVEL:
-			push_error("No handler")
+		Globals.EndSceneStatus.MAIN_MENU_CLICK_SELECT_LEVEL:
+			_run_level_selector()
 		Globals.EndSceneStatus.MAIN_MENU_CLICK_CREDITS:
 			_run_credits(true)
 		Globals.EndSceneStatus.MAIN_MENU_CLICK_QUIT:
