@@ -66,12 +66,10 @@ func _run_selected_level(level_i: int) -> void:
 	current_level_number = level_i
 	_run_level()
 
-func _on_end_of_level() -> void:
-	if current_level_number + 1 >= levels.size():
-		# No more levels, end of the game
-		_run_credits(false)
-	else:
-		_load_score_screen()
+func _on_end_of_level(new_nb_coins: int) -> void:
+	# Update game state depending on level result
+	nb_coins = new_nb_coins
+	_load_score_screen()
 
 func _on_game_over() -> void:
 	var scene: GameOver = game_over.instantiate()
@@ -87,8 +85,14 @@ func _load_score_screen() -> void:
 
 func _run_next_level() -> void:
 	current_level_number += 1
-	change_music_track(music_players[current_level_number % len(music_players)])
-	_run_level()
+
+	if current_level_number >= levels.size():
+		# No more levels, end of the game
+		_run_credits(false)
+	else:
+		# Load next level
+		change_music_track(music_players[current_level_number % len(music_players)])
+		_run_level()
 
 func _run_credits(can_go_back: bool) -> void:
 	var scene: Credits = credits.instantiate()
@@ -99,7 +103,6 @@ func change_music_track(new_audio_player: AudioStreamPlayer) -> void:
 	if current_audio_player != new_audio_player:
 		for mp in music_players:
 			mp.stop()
-
 		new_audio_player.play()
 		current_audio_player = new_audio_player
 
@@ -117,7 +120,8 @@ func _on_end_scene(status: Globals.EndSceneStatus, params: Dictionary = {}) -> v
 		Globals.EndSceneStatus.MAIN_MENU_CLICK_QUIT:
 			_quit_game()
 		Globals.EndSceneStatus.LEVEL_END:
-			_on_end_of_level()
+			var new_nb_coins: int = params["new_nb_coins"]
+			_on_end_of_level(new_nb_coins)
 		Globals.EndSceneStatus.LEVEL_GAME_OVER:
 			_on_game_over()
 		Globals.EndSceneStatus.LEVEL_RESTART:
