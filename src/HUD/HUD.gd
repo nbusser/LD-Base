@@ -1,15 +1,24 @@
 extends Control
 
-@onready var level_label = $VBoxContainer/VBoxContainer/LevelNumber/LevelNumberValue
+class_name HUD
+
+@onready var level_number_label = $VBoxContainer/VBoxContainer/LevelNumber/LevelNumberValue
 @onready var coins_label = $VBoxContainer/VBoxContainer/CoinNumber/CoinNumberValue
 @onready var level_name_label = $VBoxContainer/CenterContainer/LevelNameValue
 
-func set_level_name(level_name: String):
-	level_name_label.text = level_name
+var level_name: set = set_level_name
+func set_level_name(value: String):
+	level_name_label.text = value
 
-func set_level_number(level_number):
-	level_label.text = str(level_number + 1)
+var nb_coins: set = set_nb_coins
+func set_nb_coins(value: int):
+	coins_label.text = str(value)
 
+var level_number: set = set_level_number
+func set_level_number(value: int):
+	level_number_label.text = str(value)
 
-func set_coins(nb_coins):
-	coins_label.text = str(nb_coins)
+func init(level_state: LevelState):
+	level_name = level_state.level_data.name
+	level_number = level_state.level_number
+	nb_coins = level_state.nb_coins

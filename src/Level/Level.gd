@@ -3,7 +3,7 @@ extends Node
 signal end_of_level
 signal game_over
 
-@onready var hud = $UI/HUD
+@onready var hud: HUD = $UI/HUD
 @onready var timer: Timer = $Timer
 
 var level_state: LevelState
@@ -13,9 +13,7 @@ func _ready():
 	assert(
 		level_state, "init must be called before creating Level scene"
 	)
-	hud.set_level_number(level_state.level_number)
-	hud.set_coins(level_state.nb_coins)
-	hud.set_level_name(level_state.level_data.name)
+	hud.init(level_state)
 
 	timer.start(level_state.level_data.timer_duration)
 
