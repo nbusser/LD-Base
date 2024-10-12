@@ -2,8 +2,6 @@ extends Control
 
 class_name Credits
 
-signal back
-
 var back_button_visible: bool
 
 @onready var back_button = $CenterContainer/VBoxContainer/CenterContainer4/Back
@@ -22,4 +20,4 @@ func set_back(value: bool) -> void:
 
 
 func _on_Back_pressed() -> void:
-	emit_signal("back")
+	Globals.end_scene(Globals.EndSceneStatus.CREDITS_BACK)

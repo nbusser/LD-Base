@@ -2,9 +2,6 @@ extends Node
 
 class_name Level
 
-signal end_of_level
-signal game_over
-
 @onready var hud: HUD = $UI/HUD
 @onready var timer: Timer = $Timer
 
@@ -28,6 +25,6 @@ func init(level_number_p: int, level_data_p: LevelData, nb_coins_p: int):
 
 func _on_Timer_timeout():
 	if randi() % 2:
-		emit_signal("end_of_level")
+		Globals.end_scene(Globals.EndSceneStatus.LEVEL_END)
 	else:
-		emit_signal("game_over")
+		Globals.end_scene(Globals.EndSceneStatus.LEVEL_GAME_OVER)

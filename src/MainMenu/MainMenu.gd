@@ -2,17 +2,11 @@ extends Control
 
 class_name MainMenu
 
-signal start_game
-signal show_credits
-signal quit_game
-
 func _on_Start_pressed() -> void:
-	emit_signal("start_game")
-
+	Globals.end_scene(Globals.EndSceneStatus.MAIN_MENU_CLICK_START)
 
 func _on_Credits_pressed() -> void:
-	emit_signal("show_credits")
-
+	Globals.end_scene(Globals.EndSceneStatus.MAIN_MENU_CLICK_CREDITS)
 
 func _on_Quit_pressed() -> void:
-	emit_signal("quit_game")
+	Globals.end_scene(Globals.EndSceneStatus.MAIN_MENU_CLICK_QUIT)

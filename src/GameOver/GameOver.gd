@@ -2,13 +2,10 @@ extends Control
 
 class_name GameOver
 
-signal restart
-signal quit
-
 
 func _on_Restart_pressed() -> void:
-	emit_signal("restart")
+	Globals.end_scene(Globals.EndSceneStatus.GAME_OVER_RESTART)
 
 
 func _on_Quit_pressed() -> void:
-	emit_signal("quit")
+	Globals.end_scene(Globals.EndSceneStatus.GAME_OVER_QUIT)

@@ -2,8 +2,6 @@ extends Control
 
 class_name EndLevel
 
-signal next_level
-
 var level_number: int
 var nb_coins: int
 
@@ -26,4 +24,4 @@ func init(level_number_p: int, nb_coins_p: int) -> void:
 
 
 func _on_NextLevelButton_pressed() -> void:
-	emit_signal("next_level")
+	Globals.end_scene(Globals.EndSceneStatus.SCORE_SCREEN_NEXT)
