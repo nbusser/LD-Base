@@ -14,5 +14,9 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
+# Exports folder
+exports/*
+!exports/.gitkeep
+
 # MacOS
 .DS_Store
