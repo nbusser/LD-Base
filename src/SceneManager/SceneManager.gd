@@ -4,7 +4,7 @@ var current_level_number = 0
 var nb_coins = 0
 
 var current_player: AudioStreamPlayer
-var current_scene : set = set_scene
+var current_scene: set = set_scene
 
 @onready var music_players = $Musics.get_children() as Array[AudioStreamPlayer]
 
@@ -16,6 +16,8 @@ var current_scene : set = set_scene
 
 @onready var viewport = $SubViewportContainer/SubViewport
 
+# Settings of all levels. To be configured from the editor
+@export var levels: Array[LevelData]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,7 +57,7 @@ func set_scene(new_scene):
 
 func _load_level():
 	var scene = level.instantiate()
-	scene.init(current_level_number, nb_coins)
+	scene.init(levels[current_level_number], current_level_number, nb_coins)
 
 	scene.connect("end_of_level", Callable(self, "_on_end_of_level"))
 	scene.connect("game_over", Callable(self, "_on_game_over"))

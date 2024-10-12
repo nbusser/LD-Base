@@ -7,6 +7,9 @@ var level_number
 var nb_coins
 
 @onready var hud = $UI/HUD
+@onready var timer: Timer = $Timer
+
+var level_data: LevelData
 
 
 func _ready():
@@ -15,9 +18,13 @@ func _ready():
 	)
 	hud.set_level_number(level_number)
 	hud.set_coins(nb_coins)
+	hud.set_level_name(level_data.name)
+
+	self.timer.start(self.level_data.timer_duration)
 
 
-func init(level_number, nb_coins):
+func init(level_data_p: LevelData, level_number, nb_coins):
+	self.level_data = level_data_p
 	self.level_number = level_number
 	self.nb_coins = nb_coins
 

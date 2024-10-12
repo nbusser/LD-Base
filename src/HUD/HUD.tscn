@@ -34,7 +34,7 @@ anchor_right = 1.0
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/CenterContainer"]
+[node name="LevelNameValue" type="Label" parent="VBoxContainer/CenterContainer"]
 layout_mode = 2
 theme = SubResource("2")
 text = "Ludum Dare - Base"
