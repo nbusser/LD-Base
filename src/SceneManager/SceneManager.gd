@@ -2,11 +2,14 @@ extends Control
 
 class_name SceneManager
 
+# Settings of all levels. To be configured from the editor
+@export var levels: Array[LevelData]
+
+# State of the game
 var current_level_number := 0
 var nb_coins := 0
 
-var current_player: AudioStreamPlayer
-var current_scene: set = set_scene
+var current_audio_player: AudioStreamPlayer
 
 @onready var music_players = $Musics.get_children() as Array[AudioStreamPlayer]
 
@@ -18,14 +21,20 @@ var current_scene: set = set_scene
 
 @onready var viewport: Viewport = $SubViewportContainer/SubViewport
 
-# Settings of all levels. To be configured from the editor
-@export var levels: Array[LevelData]
+var current_scene: set = set_scene
+func set_scene(new_scene: Node) -> void:
+	# Free older scene
+	if current_scene:
+		viewport.remove_child(current_scene)
+		current_scene.queue_free()
+
+	current_scene = new_scene
+	viewport.add_child(current_scene)
 
 func _ready() -> void:
 	randomize()
 	Globals.scene_ended.connect(self._on_end_scene)
 	_run_main_menu()
-
 
 func _process(_delta: float) -> void:
 	if Input.is_action_pressed("quit"):
@@ -38,24 +47,16 @@ func _reset_game_state() -> void:
 func _quit_game() -> void:
 	get_tree().quit()
 
+func _run_main_menu() -> void:
+	var scene: MainMenu = main_menu.instantiate()
+	change_music_track(music_players[0])
+	self.current_scene = scene
 
-func _on_start_game() -> void:
+func _start_game() -> void:
+	_reset_game_state()
 	_run_level()
 
-func _on_show_credits() -> void:
-	_run_credits(true)
-
-
-func set_scene(new_scene: Node) -> void:
-	# Free older scene
-	if current_scene:
-		viewport.remove_child(current_scene)
-		current_scene.queue_free()
-
-	current_scene = new_scene
-	viewport.add_child(current_scene)
-
-
+# Load current level
 func _run_level() -> void:
 	var scene: Level = level.instantiate()
 	scene.init(current_level_number, levels[current_level_number], nb_coins)
@@ -65,73 +66,46 @@ func _run_selected_level(level_i: int) -> void:
 	current_level_number = level_i
 	_run_level()
 
-func _start_game() -> void:
-	_reset_game_state()
-	_run_level()
-
-
 func _on_end_of_level() -> void:
 	if current_level_number + 1 >= levels.size():
-		# Win
+		# No more levels, end of the game
 		_run_credits(false)
 	else:
 		_load_score_screen()
-
-
-func first_level() -> bool:
-	return current_level_number == 0
-
 
 func _on_game_over() -> void:
 	var scene: GameOver = game_over.instantiate()
 	self.current_scene = scene
 
-
 func _restart_level() -> void:
 	_run_level()
 
 func _load_score_screen() -> void:
-	var scene: 	ScoreScreen = change_level.instantiate()
+	var scene: ScoreScreen = change_level.instantiate()
 	scene.init(current_level_number, nb_coins)
 	self.current_scene = scene
-
 
 func _run_next_level() -> void:
 	current_level_number += 1
 	change_music_track(music_players[current_level_number % len(music_players)])
 	_run_level()
 
-
 func _run_credits(can_go_back: bool) -> void:
 	var scene: Credits = credits.instantiate()
-
 	scene.set_back(can_go_back)
-	if can_go_back:
-		scene.connect("back", Callable(self, "_on_show_main_menu"))
-
 	self.current_scene = scene
 
-
-func _run_main_menu() -> void:
-	var scene: MainMenu = main_menu.instantiate()
-
-	change_music_track(music_players[0])
-
-	scene.connect("start_game", Callable(self, "_on_start_game"))
-	scene.connect("quit_game", Callable(self, "_on_quit_game"))
-	scene.connect("show_credits", Callable(self, "_on_show_credits"))
-
-	self.current_scene = scene
-
-
-func change_music_track(new_player: AudioStreamPlayer) -> void:
-	if current_player != new_player:
+func change_music_track(new_audio_player: AudioStreamPlayer) -> void:
+	if current_audio_player != new_audio_player:
 		for mp in music_players:
 			mp.stop()
 
-		new_player.play()
-		current_player = new_player
+		new_audio_player.play()
+		current_audio_player = new_audio_player
 
+# State machine handling the state of the whole game
+# Everytime a scene ends, it calls this function which will load the next
+# step of the game
 func _on_end_scene(status: Globals.EndSceneStatus, params: Dictionary = {}) -> void:
 	match status:
 		Globals.EndSceneStatus.MAIN_MENU_CLICK_START:
@@ -164,4 +138,4 @@ func _on_end_scene(status: Globals.EndSceneStatus, params: Dictionary = {}) -> v
 		Globals.EndSceneStatus.CREDITS_BACK:
 			_run_main_menu()
 		_:
-			assert(false, "Unknown status " + str(status))
+			assert(false, "No handler for status " + str(status))

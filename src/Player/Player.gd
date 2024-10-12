@@ -35,10 +35,10 @@ func _physics_process(delta: float) -> void:
 	_agent.set_velocity(_velocity)
 
 
-func move(velocity: Vector2) -> void:
-	set_velocity(velocity)
+func move(velocity_p: Vector2) -> void:
+	set_velocity(velocity_p)
 	move_and_slide()
-	_velocity = velocity
+	_velocity = velocity_p
 	_sprite.rotation = lerp_angle(_sprite.rotation, velocity.angle(), 10.0 * get_physics_process_delta_time())
 	
 
