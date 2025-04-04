@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwiu4cm7rlq0p"]
 
 [ext_resource type="FontFile" uid="uid://yno87q5jq4mk" path="res://assets/fonts/Jokerman.ttf" id="1"]
-[ext_resource type="Script" path="res://src/HUD/HUD.gd" id="2"]
+[ext_resource type="Script" uid="uid://bmjl8m7gyu3qj" path="res://src/HUD/HUD.gd" id="2"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("1")])
