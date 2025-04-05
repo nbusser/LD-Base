@@ -1,6 +1,6 @@
-extends Control
-
 class_name MainMenu
+
+extends Control
 
 
 func _on_Start_pressed() -> void:

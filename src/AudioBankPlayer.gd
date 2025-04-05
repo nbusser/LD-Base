@@ -1,6 +1,6 @@
-extends AudioStreamPlayer
-
 class_name AudioBankPlayer
+
+extends AudioStreamPlayer
 
 @export var sounds: Array[AudioStream]
 

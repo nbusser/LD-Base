@@ -1,7 +1,6 @@
 extends Node
 
-const SAMPLE_GLOBAL_VARIABLE: int = 1
-
+signal scene_ended(status: EndSceneStatus, params: Dictionary)
 # Status sent along with signal end_scene()
 enum EndSceneStatus {
 	# Main meu
@@ -26,7 +25,7 @@ enum EndSceneStatus {
 	CREDITS_BACK,
 }
 
-signal scene_ended(status: EndSceneStatus, params: Dictionary)
+const SAMPLE_GLOBAL_VARIABLE: int = 1
 
 
 func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:

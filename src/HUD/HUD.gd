@@ -1,30 +1,28 @@
+class_name HUD
+
 extends Control
 
-class_name HUD
+var level_name:
+	set = set_level_name
+
+var nb_coins:
+	set = set_nb_coins
+
+var level_number:
+	set = set_level_number
 
 @onready var level_number_label: Label = $VBoxContainer/VBoxContainer/LevelNumber/LevelNumberValue
 @onready var coins_label: Label = $VBoxContainer/VBoxContainer/CoinNumber/CoinNumberValue
 @onready var level_name_label: Label = $VBoxContainer/CenterContainer/LevelNameValue
 @onready var fadein_pane: ColorRect = $FadeinPane
 
-var level_name:
-	set = set_level_name
-
 
 func set_level_name(value: String) -> void:
 	level_name_label.text = value
 
 
-var nb_coins:
-	set = set_nb_coins
-
-
 func set_nb_coins(value: int) -> void:
 	coins_label.text = str(value)
-
-
-var level_number:
-	set = set_level_number
 
 
 func set_level_number(value: int) -> void:

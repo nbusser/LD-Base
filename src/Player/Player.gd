@@ -1,6 +1,6 @@
-extends CharacterBody2D
-
 class_name Player
+
+extends CharacterBody2D
 
 var _velocity := Vector2.ZERO
 

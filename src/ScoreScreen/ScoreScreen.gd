@@ -1,6 +1,6 @@
-extends Control
-
 class_name ScoreScreen
+
+extends Control
 
 var level_number: int
 var nb_coins: int

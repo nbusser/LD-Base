@@ -1,6 +1,6 @@
-extends Resource
-
 class_name LevelState
+
+extends Resource
 
 # Represents the state of the level
 # Carries the level configuration but also holds game context information

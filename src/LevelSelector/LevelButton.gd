@@ -1,5 +1,6 @@
-extends Button
 class_name LevelButton
+
+extends Button
 
 signal level_clicked(level: int)
 

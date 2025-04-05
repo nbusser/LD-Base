@@ -1,5 +1,6 @@
-extends Resource
 class_name LevelData
+
+extends Resource
 
 # In this class, put the settings of your level
 

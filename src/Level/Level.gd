@@ -1,11 +1,11 @@
+class_name Level
+
 extends Node
 
-class_name Level
+var level_state: LevelState
 
 @onready var hud: HUD = $UI/HUD
 @onready var timer: Timer = $Timer
-
-var level_state: LevelState
 
 
 func _ready():

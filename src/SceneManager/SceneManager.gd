@@ -1,6 +1,6 @@
-extends Control
-
 class_name SceneManager
+
+extends Control
 
 # Settings of all levels. To be configured from the editor
 @export var levels: Array[LevelData]
@@ -10,6 +10,9 @@ var current_level_number := 0
 var nb_coins := 0
 
 var current_audio_player: AudioStreamPlayer
+
+var current_scene:
+	set = set_scene
 
 @onready var music_players = $Musics.get_children() as Array[AudioStreamPlayer]
 
@@ -21,9 +24,6 @@ var current_audio_player: AudioStreamPlayer
 @onready var game_over = preload("res://src/GameOver/GameOver.tscn")
 
 @onready var viewport: Viewport = $SubViewportContainer/SubViewport
-
-var current_scene:
-	set = set_scene
 
 
 func set_scene(new_scene: Node) -> void:

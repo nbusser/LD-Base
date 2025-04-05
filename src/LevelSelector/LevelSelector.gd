@@ -1,14 +1,14 @@
-extends Control
-
 class_name LevelSelector
+
+extends Control
 
 signal level_selected(level: int)
 signal back
 
+var levels: Array[LevelData]
+
 @onready var level_list = $PanelContainer/HBoxContainer/VBoxContainer/LevelList
 @onready var level_btn = preload("res://src/LevelSelector/LevelButton.tscn")
-
-var levels: Array[LevelData]
 
 
 func _ready() -> void:

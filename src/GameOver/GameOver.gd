@@ -1,6 +1,6 @@
-extends Control
-
 class_name GameOver
+
+extends Control
 
 
 func _on_Restart_pressed() -> void:

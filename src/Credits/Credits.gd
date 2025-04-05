@@ -1,6 +1,6 @@
-extends Control
-
 class_name Credits
+
+extends Control
 
 var back_button_visible: bool
 
