@@ -9,6 +9,8 @@ class_name AudioBankPlayer
 func _ready():
 	for i in range(len(sounds)):
 		sounds[i] = sounds[i]
+
+
 #		sounds[i].set_loop(false)
 
 

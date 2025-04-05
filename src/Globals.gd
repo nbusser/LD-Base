@@ -28,5 +28,6 @@ enum EndSceneStatus {
 
 signal scene_ended(status: EndSceneStatus, params: Dictionary)
 
+
 func end_scene(status: EndSceneStatus, params: Dictionary = {}) -> void:
 	scene_ended.emit(status, params)

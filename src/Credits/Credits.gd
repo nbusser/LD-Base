@@ -8,7 +8,7 @@ var back_button_visible: bool
 
 
 func _ready() -> void:
-	assert(back_button_visible != null) # ,"set_back must be called before creating Credits scene")
+	assert(back_button_visible != null)  # ,"set_back must be called before creating Credits scene")
 	if back_button_visible:
 		back_button.show()
 	else:

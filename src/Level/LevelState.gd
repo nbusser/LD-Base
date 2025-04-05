@@ -6,9 +6,10 @@ class_name LevelState
 # Carries the level configuration but also holds game context information
 
 var level_number: int = 0
-var level_data: LevelData # Config of the level
+var level_data: LevelData  # Config of the level
 
-var nb_coins: int = 0 # Coins collected from the beggining of game
+var nb_coins: int = 0  # Coins collected from the beggining of game
+
 
 func _init(level_number_p: int, level_data_p: LevelData, nb_coins_p: int):
 	self.level_number = level_number_p

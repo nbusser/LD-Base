@@ -13,6 +13,7 @@ var _velocity := Vector2.ZERO
 @onready var _sprite := $Sprite2D
 @onready var _timer := $Timer
 
+
 func _ready() -> void:
 	# Waits for Game.gd to run randomize()
 	await get_tree().process_frame
@@ -20,10 +21,11 @@ func _ready() -> void:
 	_timer.timeout.connect(self._update_pathfinding)
 	_agent.velocity_computed.connect(self.move)
 
+
 func _physics_process(delta: float) -> void:
 	if abs(global_position.distance_to(target.global_position)) < 50:
-		print('TODO: game over')
-	
+		print("TODO: game over")
+
 	if _agent.is_navigation_finished():
 		return
 
@@ -39,8 +41,10 @@ func move(velocity_p: Vector2) -> void:
 	set_velocity(velocity_p)
 	move_and_slide()
 	_velocity = velocity_p
-	_sprite.rotation = lerp_angle(_sprite.rotation, velocity.angle(), 10.0 * get_physics_process_delta_time())
-	
+	_sprite.rotation = lerp_angle(
+		_sprite.rotation, velocity.angle(), 10.0 * get_physics_process_delta_time()
+	)
+
 
 func _update_pathfinding() -> void:
-	_agent.set_target_position(target.global_position);
+	_agent.set_target_position(target.global_position)
