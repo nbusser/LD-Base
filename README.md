@@ -14,6 +14,7 @@ git config core.hooksPath "./hooks"
 It requires you to install gdtoolkit. Here is a quick start:
 ```sh
 python3 -m venv .env
+source .env/bin/activate
 pip3 install "gdtoolkit==4.*"
 ```
 
