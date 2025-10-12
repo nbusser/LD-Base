@@ -5,16 +5,12 @@ extends Control
 # Settings of all levels. To be configured from the editor
 @export var levels: Array[LevelData]
 
-# State of the game
-var current_level_number := 0
-var nb_coins := 0
-
 var current_audio_player: AudioStreamPlayer
 
 var current_scene:
 	set = set_scene
 
-@onready var music_players := $Musics.get_children() as Array[AudioStreamPlayer]
+@onready var music_players := $Musics.get_children()
 
 @onready var main_menu := preload("res://src/MainMenu/main_menu.tscn")
 @onready var level := preload("res://src/Level/level.tscn")
@@ -47,11 +43,6 @@ func _process(_delta: float) -> void:
 		get_tree().quit()
 
 
-func _reset_game_state() -> void:
-	current_level_number = 0
-	nb_coins = 0
-
-
 func _quit_game() -> void:
 	get_tree().quit()
 
@@ -63,7 +54,7 @@ func _run_main_menu() -> void:
 
 
 func _start_game() -> void:
-	_reset_game_state()
+	GameState.reset()
 	_run_level()
 
 
@@ -71,14 +62,14 @@ func _start_game() -> void:
 func _run_level() -> void:
 	var scene: Level = level.instantiate()
 	# Provies its settings to the level
-	scene.init(current_level_number, levels[current_level_number], nb_coins)
+	scene.init(levels[GameState.current_level_number])
 	# Play level music
-	change_music_track(music_players[current_level_number % len(music_players)])
+	change_music_track(music_players[GameState.current_level_number % len(music_players)])
 	self.current_scene = scene
 
 
 func _run_selected_level(level_i: int) -> void:
-	current_level_number = level_i
+	GameState.current_level_number = level_i
 	_run_level()
 
 
@@ -90,7 +81,7 @@ func _run_level_selector() -> void:
 
 func _on_end_of_level(new_nb_coins: int) -> void:
 	# Update game state depending on level result
-	nb_coins = new_nb_coins
+	GameState.nb_coins = new_nb_coins
 	_load_score_screen()
 
 
@@ -105,14 +96,13 @@ func _restart_level() -> void:
 
 func _load_score_screen() -> void:
 	var scene: ScoreScreen = score_screen.instantiate()
-	scene.init(current_level_number, nb_coins)
 	self.current_scene = scene
 
 
 func _run_next_level() -> void:
-	current_level_number += 1
+	GameState.current_level_number += 1
 
-	if current_level_number >= levels.size():
+	if GameState.current_level_number >= levels.size():
 		# No more levels, end of the game
 		_run_credits(false)
 	else:

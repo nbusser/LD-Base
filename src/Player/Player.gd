@@ -10,7 +10,7 @@ var _velocity := Vector2.ZERO
 #onready var game = map.get_parent()
 
 @onready var _agent: NavigationAgent2D = $NavigationAgent2D
-@onready var _sprite: Sprite2D = $Sprite2D
+@onready var _sprite: AnimatedSprite2D = $Sprite2D
 @onready var _timer: Timer = $Timer
 
 
