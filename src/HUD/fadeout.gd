@@ -11,7 +11,6 @@ enum Mode { FADEOUT, FADEIN }
 func fade() -> void:
 	visible = true
 	var target_a := 0.0 if mode == Mode.FADEIN else 1.0
-	print(target_a)
 	await create_tween().tween_property(self, "color:a", target_a, duration).finished
 
 

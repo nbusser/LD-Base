@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dss1w1wv5xvq1"]
 
 [ext_resource type="Texture2D" uid="uid://bprdj2krbpywu" path="res://assets/sprites/player.png" id="1"]
-[ext_resource type="Script" uid="uid://ty44l5afcwx4" path="res://src/Player/player.gd" id="2"]
+[ext_resource type="Script" uid="uid://ty44l5afcwx4" path="res://src/TilemapGame/Player/player.gd" id="2"]
 [ext_resource type="AudioStream" uid="uid://cdftql8bh2ubw" path="res://assets/sounds/Player/spawn/spawn1.wav" id="4"]
 [ext_resource type="AudioStream" uid="uid://ba1vnr0wa8k01" path="res://assets/sounds/Player/spawn/spawn0.wav" id="5"]
 [ext_resource type="AudioStream" uid="uid://b4bcome7y8keg" path="res://assets/sounds/Player/spawn/spawn2.wav" id="6"]

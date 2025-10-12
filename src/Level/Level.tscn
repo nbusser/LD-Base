@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://fkx747pj67wj"]
 
 [ext_resource type="Script" uid="uid://drh117nvpnukt" path="res://src/Level/level.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://btohiqrak4tcf" path="res://src/Map/map.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://btohiqrak4tcf" path="res://src/TilemapGame/Map/map.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dwiu4cm7rlq0p" path="res://src/HUD/hud.tscn" id="3_p81om"]
-[ext_resource type="PackedScene" uid="uid://dbqai3mwspxsp" path="res://src/HUD/Fadeout.tscn" id="4_fre1t"]
+[ext_resource type="PackedScene" uid="uid://dbqai3mwspxsp" path="res://src/HUD/fadeout.tscn" id="4_fre1t"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1")
