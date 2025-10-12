@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cotwbyxikd2nm"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ptfpv"]
+normal = Vector2(0, 1)
+distance = -128.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ck35o"]
+distance = -128.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ex2ud"]
+normal = Vector2(1, 0)
+distance = -128.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wtpph"]
+normal = Vector2(-1, 0)
+distance = -128.0
+
+[node name="Map" type="Node2D"]
+
+[node name="Borders" type="Node2D" parent="."]
+
+[node name="Ceiling" type="Area2D" parent="Borders"]
+
+[node name="Shape" type="CollisionShape2D" parent="Borders/Ceiling"]
+shape = SubResource("WorldBoundaryShape2D_ptfpv")
+
+[node name="Floor" type="Area2D" parent="Borders"]
+
+[node name="Shape" type="CollisionShape2D" parent="Borders/Floor"]
+shape = SubResource("WorldBoundaryShape2D_ck35o")
+
+[node name="LeftWall" type="Area2D" parent="Borders"]
+
+[node name="Shape" type="CollisionShape2D" parent="Borders/LeftWall"]
+shape = SubResource("WorldBoundaryShape2D_ex2ud")
+
+[node name="RightWall" type="Area2D" parent="Borders"]
+
+[node name="Shape" type="CollisionShape2D" parent="Borders/RightWall"]
+shape = SubResource("WorldBoundaryShape2D_wtpph")
