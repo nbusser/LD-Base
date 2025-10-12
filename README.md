@@ -8,14 +8,23 @@ As Ludum Daron team, regularly contesting in Ludum Dare gamejam, we use this tem
 
 Please install the git hooks by running:
 ```sh
-git config core.hooksPath "./hooks"
+./setup.sh
 ```
 
 It requires you to install gdtoolkit. Here is a quick start:
 ```sh
 python3 -m venv .env
 source .env/bin/activate
-pip3 install "gdtoolkit==4.*"
+pip install -r requirements.txt
 ```
 
 Check the [gdlint doc](https://github.com/Scony/godot-gdscript-toolkit/wiki/3.-Linter) for more details.
+
+## Deploy script
+
+**Warning:** requires [dotslash](https://dotslash-cli.com/).
+
+You can build and deploy to itchio using:
+```bash
+deploy.sh --publish [itchio repo name]
+```
