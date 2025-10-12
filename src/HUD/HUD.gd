@@ -2,13 +2,13 @@ class_name HUD
 
 extends Control
 
-var level_name:
+var level_name: String:
 	set = set_level_name
 
-var nb_coins:
+var nb_coins: int:
 	set = set_nb_coins
 
-var level_number:
+var level_number: int:
 	set = set_level_number
 
 @onready var level_number_label: Label = $VBoxContainer/VBoxContainer/LevelNumber/LevelNumberValue
