@@ -17,7 +17,7 @@ var _velocity := Vector2.ZERO
 func _ready() -> void:
 	# Waits for Game.gd to run randomize()
 	await get_tree().process_frame
-	$SoundFx/SpawnSound.play_sound()
+	$SoundFx/SpawnSound.play()
 	_timer.timeout.connect(self._update_pathfinding)
 	_agent.velocity_computed.connect(self.move)
 

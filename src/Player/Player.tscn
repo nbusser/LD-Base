@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://bprdj2krbpywu" path="res://assets/sprites/player.png" id="1"]
 [ext_resource type="Script" uid="uid://ty44l5afcwx4" path="res://src/Player/player.gd" id="2"]
-[ext_resource type="Script" uid="uid://bqub0n7gx4ukd" path="res://src/audio_bank_player.gd" id="3"]
 [ext_resource type="AudioStream" uid="uid://cdftql8bh2ubw" path="res://assets/sounds/Player/spawn/spawn1.wav" id="4"]
 [ext_resource type="AudioStream" uid="uid://ba1vnr0wa8k01" path="res://assets/sounds/Player/spawn/spawn0.wav" id="5"]
 [ext_resource type="AudioStream" uid="uid://b4bcome7y8keg" path="res://assets/sounds/Player/spawn/spawn2.wav" id="6"]
@@ -32,6 +31,13 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="1"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vgmdf"]
+streams_count = 4
+stream_0/stream = ExtResource("5")
+stream_1/stream = ExtResource("4")
+stream_2/stream = ExtResource("6")
+stream_3/stream = ExtResource("7")
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("2")
 
@@ -49,12 +55,10 @@ target_desired_distance = 20.0
 path_max_distance = 60.0
 avoidance_enabled = true
 
-[node name="SoundFx" type="Node" parent="."]
+[node name="SoundFx" type="Node2D" parent="."]
 
-[node name="SpawnSound" type="AudioStreamPlayer" parent="SoundFx"]
-bus = &"SFX"
-script = ExtResource("3")
-sounds = Array[AudioStream]([ExtResource("5"), ExtResource("4"), ExtResource("6"), ExtResource("7")])
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="SoundFx"]
+stream = SubResource("AudioStreamRandomizer_vgmdf")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
