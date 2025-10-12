@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbqai3mwspxsp"]
+
+[ext_resource type="Script" uid="uid://c33nq3tlc14ma" path="res://src/HUD/fadeout.gd" id="1_w4to7"]
+
+[node name="Fadeout" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0)
+script = ExtResource("1_w4to7")

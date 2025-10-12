@@ -14,7 +14,6 @@ var level_number: int:
 @onready var level_number_label: Label = $VBoxContainer/VBoxContainer/LevelNumber/LevelNumberValue
 @onready var coins_label: Label = $VBoxContainer/VBoxContainer/CoinNumber/CoinNumberValue
 @onready var level_name_label: Label = $VBoxContainer/CenterContainer/LevelNameValue
-@onready var fadein_pane: ColorRect = $FadeinPane
 
 
 func set_level_name(value: String) -> void:
@@ -34,6 +33,4 @@ func init(level_state: LevelState) -> void:
 
 
 func _ready() -> void:
-	# Fadein animation
-	fadein_pane.visible = 1
-	create_tween().tween_property(fadein_pane, "modulate", Color.TRANSPARENT, 0.7)
+	$Fadein.fade()
