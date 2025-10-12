@@ -22,7 +22,7 @@ Globals="*res://src/Globals.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/optional/plugin.cfg")
 
 [input]
 
