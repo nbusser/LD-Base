@@ -16,12 +16,12 @@ var current_scene:
 
 @onready var music_players = $Musics.get_children() as Array[AudioStreamPlayer]
 
-@onready var main_menu = preload("res://src/MainMenu/MainMenu.tscn")
-@onready var level = preload("res://src/Level/Level.tscn")
-@onready var score_screen = preload("res://src/ScoreScreen/ScoreScreen.tscn")
-@onready var level_selector = preload("res://src/LevelSelector/LevelSelector.tscn")
-@onready var credits = preload("res://src/Credits/Credits.tscn")
-@onready var game_over = preload("res://src/GameOver/GameOver.tscn")
+@onready var main_menu = preload("res://src/MainMenu/main_menu.tscn")
+@onready var level = preload("res://src/Level/level.tscn")
+@onready var score_screen = preload("res://src/ScoreScreen/score_screen.tscn")
+@onready var level_selector = preload("res://src/LevelSelector/level_selector.tscn")
+@onready var credits = preload("res://src/Credits/credits.tscn")
+@onready var game_over = preload("res://src/GameOver/game_over.tscn")
 
 @onready var viewport: Viewport = $SubViewportContainer/SubViewport
 

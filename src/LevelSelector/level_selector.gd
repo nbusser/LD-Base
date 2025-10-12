@@ -8,7 +8,7 @@ signal back
 var levels: Array[LevelData]
 
 @onready var level_list = $PanelContainer/HBoxContainer/VBoxContainer/LevelList
-@onready var level_btn = preload("res://src/LevelSelector/LevelButton.tscn")
+@onready var level_btn = preload("res://src/LevelSelector/level_button.tscn")
 
 
 func _ready() -> void:
