@@ -30,7 +30,3 @@ func set_level_number(value: int) -> void:
 
 func init(level_state: LevelState) -> void:
 	level_name = level_state.level_data.name
-
-
-func _ready() -> void:
-	$Fadein.fade()

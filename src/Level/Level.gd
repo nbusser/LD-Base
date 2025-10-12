@@ -14,6 +14,8 @@ func _ready():
 
 	timer.start(level_state.level_data.timer_duration)
 
+	$UI/Fadein.fade()
+
 
 func init(level_data_p: LevelData):
 	level_state = LevelState.new(level_data_p)
@@ -22,6 +24,8 @@ func init(level_data_p: LevelData):
 func _on_Timer_timeout():
 	# Simulates game state change
 	level_state.nb_coins += randi() % 100
+
+	await $UI/Fadeout.fade()
 
 	if randi() % 4:
 		Globals.end_scene(Globals.EndSceneStatus.LEVEL_GAME_OVER)
